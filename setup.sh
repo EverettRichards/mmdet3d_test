@@ -63,21 +63,19 @@ pip install "mmengine>=0.10.0"
 # -----------------------------------------------------------------
 # 4.  mmcv 2.1.0 – mmdet3d 1.4.0 requires mmcv>=2.0.0rc4,<2.2.0.
 #
-#     Try prebuilt wheel first (fast, no compiler needed).
-#     Fall back to source build with --no-build-isolation so the
-#     pinned setuptools is used, avoiding the pkg_resources error
-#     that occurs when the isolated build env gets setuptools>=82.
+#     Use openmim (mim) to install mmcv.  openmim detects the active
+#     PyTorch/CUDA version and fetches the matching prebuilt wheel
+#     from the OpenMMLab CDN, ensuring the compiled _ext module is
+#     included.  A plain 'pip install mmcv' from PyPI installs only
+#     the source distribution, which requires a CUDA-capable compiler
+#     and may silently omit the _ext extension (causing the error
+#     "No module named 'mmcv._ext'").
 # -----------------------------------------------------------------
-echo "==> Installing mmcv 2.1.0"
-if pip install mmcv==2.1.0 \
-       --find-links https://download.openmmlab.com/mmcv/dist/cu124/torch2.5/index.html \
-       --quiet 2>/dev/null; then
-    echo "  Prebuilt mmcv wheel installed."
-else
-    echo "  Prebuilt wheel unavailable; building from source."
-    echo "  Using --no-build-isolation to avoid pkg_resources error in isolated env."
-    pip install mmcv==2.1.0 --no-build-isolation
-fi
+echo "==> Installing openmim"
+pip install openmim --quiet
+
+echo "==> Installing mmcv 2.1.0 (prebuilt wheel via openmim)"
+mim install "mmcv==2.1.0"
 
 # -----------------------------------------------------------------
 # 5.  MMDetection and MMDetection3D.
