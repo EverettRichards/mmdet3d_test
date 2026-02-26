@@ -113,8 +113,7 @@ pip install \
     open3d \
     "networkx>=2.2,<3.0" \
     nuscenes-devkit \
-    lyft_dataset_sdk \
-    nuimages-devkit
+    lyft_dataset_sdk
 
 # -----------------------------------------------------------------
 # 7.  Verify pkg_resources is still importable.
