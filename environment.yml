@@ -15,8 +15,11 @@ dependencies:
       - torchvision==0.20.1+cu124
       - torchaudio==2.5.1+cu124
       - mmengine>=0.10.0
+      # openmim installs mmcv with the correct prebuilt wheel (incl. _ext).
+      # A plain 'pip install mmcv' from PyPI omits the compiled _ext extension.
+      - openmim
       # mmcv 2.1.0: mmdet3d 1.4.0 requires mmcv>=2.0.0rc4,<2.2.0
-      # Prebuilt wheel attempted first; falls back to source build via setup.sh
+      # Install via: mim install "mmcv==2.1.0"  (handled by setup.sh)
       - mmcv==2.1.0
       - mmdet>=3.2.0,<=3.3.0
       - mmdet3d==1.4.0
