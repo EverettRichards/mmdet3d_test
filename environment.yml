@@ -1,0 +1,43 @@
+name: mmdet3d
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  # Pin setuptools < 82 to avoid pkg_resources removal (setuptools >= 82 drops pkg_resources)
+  - setuptools<82
+  - pip:
+      - --extra-index-url https://download.pytorch.org/whl/cu124
+      - torch==2.5.1+cu124
+      - torchvision==0.20.1+cu124
+      - torchaudio==2.5.1+cu124
+      - mmengine>=0.10.0
+      # mmcv 2.1.0: mmdet3d 1.4.0 requires mmcv>=2.0.0rc4,<2.2.0
+      # Prebuilt wheel attempted first; falls back to source build via setup.sh
+      - mmcv==2.1.0
+      - mmdet>=3.2.0,<=3.3.0
+      - mmdet3d==1.4.0
+      # numpy<2.0 required: mmdet3d/mmcv are compiled against numpy 1.x C API
+      - numpy<2.0
+      # opencv-python<4.10 required: >=4.10 mandates numpy>=2
+      - opencv-python-headless<4.10
+      - nuscenes-devkit
+      - lyft_dataset_sdk
+      - networkx>=2.2,<3.0
+      - nuimages-devkit
+      - open3d
+      - scipy
+      - scikit-learn
+      - pyquaternion
+      - shapely
+      - matplotlib
+      - pillow
+      - pyyaml
+      - tqdm
+      - addict
+      - yapf
+      - termcolor
+      - rich
