@@ -27,7 +27,6 @@ dependencies:
       - nuscenes-devkit
       - lyft_dataset_sdk
       - networkx>=2.2,<3.0
-      - nuimages-devkit
       - open3d
       - scipy
       - scikit-learn
